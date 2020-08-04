@@ -1,3 +1,21 @@
+// Datagrama - Envio
+
+try {
+DatagramSocket socket = new DatagramSocket();
+InetAddress destino = InetAddress.getByName(
+"127.0.0.1");
+String mensagem = "Hello";
+byte[] dados = mensagem.getBytes();
+int porta = 5000;
+DatagramPacket pacote = new DatagramPacket(
+dados, dados.length, destino, porta);
+socket.send(pacote);
+} catch (SocketException e) { e.printStackTrace();
+} catch (IOException e) {e.printStackTrace(); }
+
+
+//
+
 public class ServidorTCPBasico {
   public static void main(String[] args) {
     try {
@@ -22,3 +40,23 @@ public class ServidorTCPBasico {
     finally {...}
   }
 }
+
+
+//
+Datagrama - recepção
+try {
+int porta = 5000;
+DatagramSocket socket = new DatagramSocket(porta);
+byte[] dados = new byte[100];
+DatagramPacket pacote = new DatagramPacket(
+dados, dados.length);
+socket.receive(pacote);
+String mensagem = new String(pacote.getData(), 0,
+pacote.getLength() );
+System.out.println("Mensagem: " + mensagem);
+} catch (SocketException e) { e.printStackTrace();
+} catch (IOException e) {e.printStackTrace(); }
+
+//
+
+
